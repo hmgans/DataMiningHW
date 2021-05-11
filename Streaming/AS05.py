@@ -1,4 +1,6 @@
-#This is the python file for AS05
+# This is the python file for AS05
+# This file contains streaming algorthms to approximate frequency using MisraGrigg's algorithm aand Count min sketch
+# 
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 import numpy
@@ -10,7 +12,7 @@ import string
 
 
 
-
+# Misra Griggs algorthm will keep track of frequency by storing the most recent elements and then updating as it recieves new information.
 def MisraAlg(textFile):
 
     labels = {}
@@ -31,6 +33,7 @@ def MisraAlg(textFile):
             labels[item] = 1
         else:
             notAdded = True
+            # Get rid of a label with 0 and add new element in its place
             for j in labels.keys():
                 if labels[j] == 0:
                     labels[item] = labels.pop(j)
@@ -60,7 +63,7 @@ def hash_function(x):
         return int(k * (a * ord(var) - int( a * ord(var)))) % 8
     return h
 
-
+# Count min sketch find the min of hashing a letter to retrieve frequencies of all desired values.
 def CountMinSketchAlg(textFile):
 
     

@@ -1,4 +1,7 @@
 #This is the python file for AS03
+# LSH is the process of using multiple hash functions to compute simularity.
+# Compute simularity using f(s) = 1 - (1-S^{b})^{r} where S is the simularity of two sets, b = # of bands, r = # of hash functions
+
 from numpy import *
 from random import random
 from random import randint
@@ -26,7 +29,7 @@ def varyingRandB():
     plt.legend()
     plt.show()
 
-
+# Cretae unit vecotrs to  then compare dot products latere
 def createUnitVectors(dim, t):
 
     vectors = []
@@ -52,6 +55,7 @@ def calculateDotProducts(vectors):
             products.append(dotProduct)
     return products
 
+# Plot Dot product 
 def plotCFGForDotProducts(dotP):
 
     m = len(dotP)
@@ -96,7 +100,7 @@ def normalizedDataPoints():
     return vectors
                
            
-
+# Find Angular simularaties above a certain threshold Tau
 def angSim(a,b):
     result = 1 - ((1/np.pi)*np.arccos(np.dot(a,b)))
     return result

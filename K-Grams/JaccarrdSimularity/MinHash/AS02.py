@@ -1,4 +1,10 @@
-#This is the python file for AS01
+#This is the python file for AS02
+#
+# This file is able to create a set of 2,3 gram words and 3 gram chars
+# Using the resulting grams, it computes the Jaccard Simularity
+# This file also implements Min Hash, which estimates the Jaccard Simularity without 
+# going through all elements. It is useful when the dataset is large or is a stream.
+#
 from random import random
 from random import randint
 import numpy as np
@@ -104,6 +110,7 @@ def minHashFunction(t, s1, s2):
     #perform calculations
     totalSim = 0
     scalar = float(1)/t
+    # Shuffle the list of grams and then find columns with that contain the same first gram
     for i in range(t):
         random.shuffle(listOfKGrams)
         first1 = None
@@ -120,11 +127,12 @@ def minHashFunction(t, s1, s2):
                 break
 
         if(first1 == first2):
-            totalSim += float(scalar)
+            totalSim += float(scalar) # Add the scalar for simularity when the first in a column are the same.
         first1 = None
         first2 = None
     return totalSim
 
+# This was a test that didnt work
 def minHashFunction2(t, s1, s2):
 
     info1 = s1.keys()

@@ -1,3 +1,4 @@
+# this file uses Markov Chains and different Page Rank algorithms like Matrix Power, StatePropogation, Random walk, and Eigen Analysis.
 import numpy as np
 from scipy.spatial import distance_matrix
 from scipy import linalg as LA

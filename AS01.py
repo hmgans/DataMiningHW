@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import time
 
 
+
 #Part 1A
 # n - int that is the max of the domain 1-n
 def randomIntCollision(n):

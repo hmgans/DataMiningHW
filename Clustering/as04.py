@@ -1,4 +1,7 @@
 #This is the python file for AS04
+# This file implements the use of the three hierarchical clustering methods: single link, complete link, and mean link for clustering
+# It also runs three Assignment Based clustering methods: K++Means, Gonzalez, and Lloyds Algorithm
+
 from scipy.cluster.hierarchy import dendrogram, linkage
 from matplotlib import pyplot as plt
 import numpy
@@ -21,7 +24,7 @@ def textFileReadingAndStorage(name):
 
     return arr
 
-
+# Single Link,  find closest point and adds it to the cluster
 def singleLinkClusters(arr):
     result = linkage(arr, 'single')
     fig = plt.figure(figsize=(18,7))
@@ -55,7 +58,7 @@ def singleLinkClusters(arr):
 
     plt.show()
 
-
+# Complete Link adds the minimum maximum point to the all points in the cluster.
 def completeLinkClusters(arr):
     result = linkage(arr, 'complete')
     fig = plt.figure(figsize=(18,7))
@@ -89,7 +92,7 @@ def completeLinkClusters(arr):
 
     plt.show()
 
-
+# Mean Links adds the minimum average point to the cluster.
 def meanLinkClusters(arr):
     result = linkage(arr, 'average')
     fig = plt.figure(figsize=(18,7))
@@ -273,6 +276,7 @@ def plotScatterForLloyd(arr, centers):
 
     plt.show()
 
+# Gonzalez's Algorthm will select a center at random and then will chose the next center as the farthest point from that center.
 def GonzalezAlgorthim(arr, k):
     n = len(arr)
 
@@ -310,7 +314,7 @@ def GonzalezAlgorthim(arr, k):
     
     return s
 
-
+# K Means++ finds the starting center points by selecting the next center based on distance
 def KMeansPP(arr, k):
     n = len(arr)
 
@@ -357,6 +361,7 @@ def KMeansPP(arr, k):
 
     return s
 
+# Adjusts centers based on the closest points to the centers.
 def LloydAlgArr(k, arr):
     n = len(arr)
     dim = len(arr[0])
@@ -420,7 +425,7 @@ def LloydAlgArr(k, arr):
 
 
 
-    
+# usees k++ to find starting center points to adjust later
 def LloydAlgKarr(karr, arr):
 
     n = len(arr)
@@ -551,24 +556,24 @@ def PlotAcumulativeDensityL(data):
     plt.show()
 
 #Part 1
-#arr = textFileReadingAndStorage('C1.txt')
-#singleLinkClusters(arr)
-#completeLinkClusters(arr)
-#meanLinkClusters(arr)
+arr = textFileReadingAndStorage('C1.txt')
+singleLinkClusters(arr)
+completeLinkClusters(arr)
+meanLinkClusters(arr)
 
 #Part 2 A
-# arr =textFileReadingAndStorage('C2.txt')
-# centers = GonzalezAlgorthim(arr, 4)
-# global phiG
-# print(centers)
-# print(centerCost(arr, centers, phiG))
-# print(meanCost(arr, centers))
-# plotScatterForGonz(arr, centers, phiG)
+arr = textFileReadingAndStorage('C2.txt')
+centers = GonzalezAlgorthim(arr, 4)
+global phiG
+print(centers)
+print(centerCost(arr, centers, phiG))
+print(meanCost(arr, centers))
+plotScatterForGonz(arr, centers, phiG)
 
 # #Parrt 2 C.2
-# lcenters = LloydAlgKarr(centers, arr)
-# plotScatterForLloyd(arr, lcenters)
-# print(meanCost(arr, lcenters))
+lcenters = LloydAlgKarr(centers, arr)
+plotScatterForLloyd(arr, lcenters)
+print(meanCost(arr, lcenters))
 
 
 #Part 2 B
@@ -580,27 +585,27 @@ for i in range(100):
     #lcenters = LloydAlgKarr(centers, arr)
     mean[i] = meanCost(arr, centers)
     #lmean[i] = meanCost(arr, lcenters)
-#print(centers)
-#print(lcenters)
+print(centers)
+print(lcenters)
 PlotAcumulativeDensity(mean)
 
 
 #Part 2 C.3
-# PlotAcumulativeDensityL(lmean)
-# hits = 0
-# size = len(mean)
-# for i in range(size):
-#     if mean[i]==lmean[i]:
-#         hits += 1
-# print(float(hits)/size)
+PlotAcumulativeDensityL(lmean)
+hits = 0
+size = len(mean)
+for i in range(size):
+    if mean[i]==lmean[i]:
+        hits += 1
+print(float(hits)/size)
 
 #Part 3A
 
-# arr =textFileReadingAndStorage('C2.txt')
-# lcenters = LloydAlgArr(4, arr)
+arr =textFileReadingAndStorage('C2.txt')
+lcenters = LloydAlgArr(4, arr)
 
-# plotScatterForLloyd(arr, lcenters)
-# print(meanCost(arr, lcenters))
+plotScatterForLloyd(arr, lcenters)
+print(meanCost(arr, lcenters))
 
 
 
